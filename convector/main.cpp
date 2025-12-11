@@ -12,5 +12,5 @@ int main()
         });
 
     //set the port, set the app to run on multiple threads, and run the app
-    app.port(8080).multithreaded().run();
+    app.bindaddr("127.0.0.1").port(8080).multithreaded().run();
 }
