@@ -1,0 +1,54 @@
+﻿<!<!DOCTYPE html>
+<html>
+<head>
+    <title>Счетчик кликов</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .counter {
+            font-size: 48px;
+            font-weight: bold;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 8px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="counter">Кликов: <span id="count">0</span></div>
+    <button onclick="increment()">Кликнуть!</button>
+    
+    <script>
+        async function loadCounter() {
+            const response = await fetch('/get');
+            const data = await response.json();
+            document.getElementById('count').textContent = data.count;
+        }
+        
+        async function increment() {
+            const response = await fetch('/increment', { method: 'POST' });
+            const data = await response.json();
+            document.getElementById('count').textContent = data.count;
+        }
+        
+        loadCounter();
+    </script>
+</body>
+</html>
